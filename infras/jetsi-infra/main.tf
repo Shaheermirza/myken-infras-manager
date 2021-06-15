@@ -24,7 +24,7 @@ terraform {
 }
 # terraform {
 #   backend "local" {
-#     path = "relative/path/to/terraform.tfstate"
+#     path = "files/terraform.tfstate"
 #   }
 # }
 #=========================================================================================== modules
@@ -35,7 +35,13 @@ module "myken_jetsi_front" {
 module "myken_jetsi_backend" {
   source = "./modules/backend"
 }
-
+module "myken_jibri" {
+  source = "./modules/jibri"
+}
+#=========================================================================================== test
+resource "aws_autoscaling_policy" "test-policy" {
+  # (resource arguments)
+}
 #=========================================================================================== debug
 # data "aws_elasticache_cluster" "main" {
 
