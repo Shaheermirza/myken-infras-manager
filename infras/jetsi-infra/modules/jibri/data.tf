@@ -15,3 +15,14 @@ locals {
 output "aws_vpc" {
   value = local.subnets
 }
+//===================================================================================================== data
+# data "aws_launch_configuration" "jibri_latest_launch_config" {
+#   most_recent      = true
+#   owners           = ["self"]
+
+#   filter {
+#     name   = "Name"
+#     values = ["jibri-v*"]
+#   }
+# }
+//===================================================================================================== 

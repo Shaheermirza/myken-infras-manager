@@ -38,8 +38,8 @@ module "myken_jetsi_backend" {
 module "myken_jibri" {
   source = "./modules/jibri"
 }
-#=========================================================================================== test
-resource "aws_autoscaling_policy" "test-policy" {
+#=========================================================================================== imports
+resource "aws_security_group" "jibri" {
   # (resource arguments)
 }
 #=========================================================================================== debug
