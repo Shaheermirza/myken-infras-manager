@@ -38,10 +38,26 @@ module "myken_jetsi_backend" {
 module "myken_jibri" {
   source = "./modules/jibri"
 }
-#=========================================================================================== imports
-resource "aws_security_group" "jibri" {
-  # (resource arguments)
+module "myken_jvb" {
+  source = "./modules/jvb"
 }
+#=========================================================================================== imports
+# resource "aws_autoscaling_group" "jvb" {
+#   # (resource arguments)
+# }
+# resource "aws_autoscaling_policy" "jvb_octo_free" {
+#   # (resource arguments)
+# }
+# resource "aws_autoscaling_policy" "jvb_octo_need" {
+#   # (resource arguments)
+# }
+# resource "aws_launch_configuration" "jvb" {
+#   # (resource arguments)
+# }
+# resource "aws_security_group" "jvb" {
+#   # (resource arguments)
+# }
+
 #=========================================================================================== debug
 # data "aws_elasticache_cluster" "main" {
 
