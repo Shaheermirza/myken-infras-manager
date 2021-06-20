@@ -1,6 +1,22 @@
 
 
-
+# config
+    create .auto.tfvars.json on root project path :
+    ````
+        {
+            "config" : {
+                "access_key" : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "secret_key" : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "profile" : "myken_infras_manager",
+                "region"  : "ap-south-1"
+            },
+            "regions" : {
+                "r0" : "ap-south-1",
+                "r1" : "eu-west-2",
+                "r2" : "ap-southeast-2"
+            }
+        }
+    ````
 # Init
     terraform init
 
@@ -17,7 +33,7 @@ resource "aws_eip_association" "eip_assoc" {
 
 
 
-** Manual Things to setup :
+##  Manual Things to setup :
 - ami images
 - staic ip setup : creation + tagName
 - DNS route53.

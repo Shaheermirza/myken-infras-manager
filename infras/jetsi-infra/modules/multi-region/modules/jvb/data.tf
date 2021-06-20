@@ -1,4 +1,5 @@
 //===================================================================================================== data
+//===================================================================================================== data
 data "aws_vpc" "default" {
     default = true
 }
@@ -26,7 +27,14 @@ locals {
     managedBy = "myken-infras-manger@terrafom"
     env = "prod"
 
-    ami_id = "ami-01f26dba3a93268e3"
+    ami_per_region = {
+        ap-south-1 = "ami-01f26dba3a93268e3"
+        eu-west-2 = "ami-0262f3eaca3ff4402"
+        ap-southeast-2 = "ami-057d90b2321c05951"
+    }
+
+    ami_id = local.ami_per_region[var.module_region]
+
     instanceType = "c5.xlarge"
 }
 //===================================================================================================== data
@@ -40,7 +48,13 @@ locals {
 #    }
 # }
 //===================================================================================================== output
-output "moduleName" {
-    value = local.moduleName
+# output "moduleName" {
+#     value = provider.region
+# }
+output "ami_id" {
+    value = local.ami_id
 }
+# output "region" {
+#     value = data.aws_region.current.name
+# }
 //===================================================================================================== END
