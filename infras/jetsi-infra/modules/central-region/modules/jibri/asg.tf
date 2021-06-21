@@ -6,16 +6,17 @@ resource "aws_autoscaling_group" "jibri" {
 
     capacity_rebalance        = false
     default_cooldown          = 300
-    desired_capacity          = 0
     enabled_metrics           = []
     health_check_grace_period = 60
     load_balancers            = []
 
-    max_instance_lifetime     = 0
-    max_size                  = 0
+    min_size                  = 1
+    desired_capacity          = 1
+    max_size                  = 4
+
     metrics_granularity       = "1Minute"
-    min_size                  = 0
     protect_from_scale_in     = false
+    max_instance_lifetime     = 0
 
     suspended_processes       = []
     target_group_arns         = []
@@ -29,6 +30,7 @@ resource "aws_autoscaling_group" "jibri" {
     }
 
     timeouts {}
+    depends_on = [aws_launch_configuration.jibri]
 }
 # aws_autoscaling_policy.jibri_need:
 resource "aws_autoscaling_policy" "jibri_need" {
@@ -60,12 +62,12 @@ resource "aws_launch_configuration" "jibri" {
     associate_public_ip_address      = false
     ebs_optimized                    = false
     enable_monitoring                = false
-    #iam_instance_profile             = "arn:aws:iam::988339190536:instance-profile/ASG_JIBRI_ROLE"
+    iam_instance_profile             = "arn:aws:iam::988339190536:instance-profile/ASG_JIBRI_ROLE"
     image_id                         = "ami-01af747a82cdd687c"
     instance_type                    = "t2.xlarge"
     key_name                         = "meet"
     security_groups                  = [aws_security_group.jibri.id]
-    #user_data                        = "0dc0cf41c38658a4b5a24fcc04c8b9b9caeb6e34"
+    user_data = filebase64("${path.module}/data/lauch-template.user-data.sh")
     vpc_classic_link_security_groups = []
 
     root_block_device {

@@ -3,6 +3,7 @@ resource "aws_security_group" "jibri" {
     name        = "jibri-sg-v1--tf"
     #owner_id    = "988339190536"
     description = "jibri workers sg"
+    
     egress      = [
         {
             cidr_blocks      = [
@@ -153,7 +154,52 @@ resource "aws_security_group" "jibri" {
             security_groups  = []
             self             = false
             to_port          = 9090
-        }
+        },
+        {
+            cidr_blocks      = [
+                "196.217.20.153/32",
+            ]
+            description      = "Youssef Yoletech IP"
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "39.52.194.214/32",
+                "39.52.214.79/32",
+            ]
+            description      = ""
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = [
+                "58.65.214.19/32",
+                "39.52.228.39/32",
+                "39.52.223.226/32",
+                "41.248.161.249/32",
+                "39.52.194.214/32",
+                "39.52.214.79/32",
+            ]
+            description      = ""
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 65535
+        },
     ]
     tags_all    = {}
     vpc_id      = data.aws_vpc.default.id

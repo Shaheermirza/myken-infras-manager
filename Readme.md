@@ -1,6 +1,21 @@
 
 
-# config
+# global config
+    
+    Add credentials file for aws :
+    '''
+    $ mkdir ~/.aws/
+    $ vi ~/.aws/credentials 
+        [myken_infras_manager] ; myken_infras_manager profile
+        aws_access_key_id = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# infra config
+    change directory to specific infra that you want to deploy , for exemple : jetsi infra :
+    '''
+        $ cd infras/jetsi-infra
+        
+    '''
     create .auto.tfvars.json on root project path :
     ```
         {
@@ -17,6 +32,7 @@
             }
         }
     ```
+
 # Init
     terraform init
 

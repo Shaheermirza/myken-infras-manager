@@ -6,16 +6,16 @@ resource "aws_autoscaling_group" "subject" {
 
     capacity_rebalance        = false
     default_cooldown          = 300
-    desired_capacity          = 0
     enabled_metrics           = []
     health_check_grace_period = 60
     load_balancers            = []
 
-    max_instance_lifetime     = 0
-    max_size                  = 0
+    min_size                  = 1
+    desired_capacity          = 1
+    max_size                  = 4
     metrics_granularity       = "1Minute"
-    min_size                  = 0
     protect_from_scale_in     = false
+    max_instance_lifetime     = 0
 
     suspended_processes       = []
     target_group_arns         = []
