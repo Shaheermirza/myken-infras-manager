@@ -2,7 +2,7 @@
 
 # config
     create .auto.tfvars.json on root project path :
-    ````
+    ```
         {
             "config" : {
                 "access_key" : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -16,7 +16,7 @@
                 "r2" : "ap-southeast-2"
             }
         }
-    ````
+    ```
 # Init
     terraform init
 
@@ -25,15 +25,15 @@
 
 
 ## On final prod deployment , please do not forget to un comment the static ip association :
-resource "aws_eip_association" "eip_assoc" {
-  instance_id   = aws_instance.this.id
-  allocation_id = data.aws_eip.manager_ip.id
-}
+    resource "aws_eip_association" "eip_assoc" {
+        instance_id   = aws_instance.this.id
+        allocation_id = data.aws_eip.manager_ip.id
+    }
 
 
 
 
 ##  Manual Things to setup :
-- ami images
-- staic ip setup : creation + tagName
-- DNS route53.
+    - ami images
+    - staic ip setup : creation + tagName
+    - DNS route53.

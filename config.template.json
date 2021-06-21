@@ -1,0 +1,13 @@
+{
+    "config" : {
+        "access_key" : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret_key" : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "profile" : "myken_infras_manager",
+        "region"  : "ap-south-1"
+    },
+    "regions" : {
+        "r0" : "ap-south-1",
+        "r1" : "eu-west-2",
+        "r2" : "ap-southeast-2"
+    }
+}
