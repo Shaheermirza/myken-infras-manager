@@ -14,7 +14,7 @@
     change directory to specific infra that you want to deploy , for exemple : jetsi infra :
     '''
         $ cd infras/jetsi-infra
-        
+
     '''
     create .auto.tfvars.json on root project path :
     ```
@@ -34,9 +34,15 @@
     ```
 
 # Init
+    cd infras/jetsi-infra
     terraform init
 
-# Deploy
+# Deploy infra
+    cd infras/jetsi-infra
+    terraform apply  -auto-approve
+
+# Destroy infra
+    cd infras/jetsi-infra
     terraform apply  -auto-approve
 
 
