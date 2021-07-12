@@ -9,6 +9,7 @@ provider "aws" {
     secret_key = var.config.secret_key
     profile = var.config.profile
     region  = var.config.region
+    #region = "eu-west-2"
 }
 # output "access" {
 #   value = var.config
@@ -16,9 +17,10 @@ provider "aws" {
 #=========================================================================================== backend
 terraform {
   backend "s3" {
-    bucket = "infras-deploy-repo"
+    profile = "myken_infras_manager"
+    bucket = "infras-deploy-repo-c0"
     key    = "infras/websocket-infra/terraform/terraform.tfstate"
-    //region = "us-east-1"
+    region = "ap-south-1"
   }
 }
 # terraform {
@@ -37,6 +39,10 @@ module "myken_websocket_LB" {
 
 module "myken_websocket_asg" {
   source = "./modules/asg"
+}
+#=========================================================================================== import
+resource "aws_elasticache_replication_group" "secondary" {
+  # (resource arguments)
 }
 
 #=========================================================================================== debug
