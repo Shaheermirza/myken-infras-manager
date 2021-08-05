@@ -60,3 +60,40 @@
     - ami images
     - staic ip setup : creation + tagName
     - DNS route53.
+
+
+### Naming requirements
+    - central region :
+        - Backend :
+            - requirments :
+                - ami : name : meetBack-v* 
+                - eip : tag:Name : meetBack-ip
+            - generated :
+                - security_group : meetBack--tf
+                - aws_instance : tag:Name : meetBack-v0--tf
+        - Jibri :
+            - requirments :
+                - ami : id : ami-01af747a82cdd687c
+            - generated :
+                - security_group : jibri-sg-v1--tf
+                - aws_launch_configuration : name : jibri-v5--tf
+                - aws_autoscaling_group : name : JibriAutoScaleGroup--tf
+    - multi region :
+        - FrontEnd :
+            - requirments :
+                - ami : name : meetFront-v* 
+                - eip : tag:Name : meetFront-ip
+            - generated :
+                - security_group : meetFront--tf
+                - aws_instance : tag:Name : meetFront-v0--tf
+        - jvb :
+            - requirments :
+                -   ami_per_region = {
+                        ap-south-1 = "ami-01f26dba3a93268e3"
+                        eu-west-2 = "ami-0262f3eaca3ff4402"
+                        ap-southeast-2 = "ami-057d90b2321c05951"
+                    }
+            - generated :
+                - security_group : jvb-v1--tf
+                - aws_launch_configuration : name : jvb-v1--tf
+                - aws_autoscaling_group : name : jvb-v1--tf
