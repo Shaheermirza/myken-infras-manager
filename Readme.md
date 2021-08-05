@@ -9,7 +9,12 @@
         [myken_infras_manager] ; myken_infras_manager profile
         aws_access_key_id = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
+# AWS setup
+    check/change setup config on ${infra}/main.tf
+    Create bucket : 
+        bucket = "infras-deploy-repo-c0"
+    Create Folder on bucket for each infra ( to store the infra state change )
+        key    = "infras/jetsi-infra/terraform/terraform.tfstate"
 # infra config
     change directory to specific infra that you want to deploy , for exemple : jetsi infra :
     '''
