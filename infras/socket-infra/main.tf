@@ -41,9 +41,9 @@ module "myken_websocket_asg" {
   source = "./modules/asg"
 }
 #=========================================================================================== import
-resource "aws_elasticache_replication_group" "secondary" {
-  # (resource arguments)
-}
+# resource "aws_elasticache_replication_group" "secondary" {
+#   # (resource arguments)
+# }
 
 #=========================================================================================== debug
 # data "aws_elasticache_cluster" "main" {
