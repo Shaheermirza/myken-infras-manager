@@ -11,14 +11,20 @@ terraform {
 #=========================================================================================== mumbai region
 module "myken_jetsi_front" {
   source = "./modules/frontend"
+
   module_region = var.module_region
+  arrays = var.arrays
+
   providers = {
     aws = aws.current
   }
 }
 module "myken_jetsi_jvb" {
   source = "./modules/jvb"
+  
   module_region = var.module_region
+  arrays = var.arrays
+
   providers = {
     aws = aws.current
   }

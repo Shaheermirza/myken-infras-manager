@@ -1,18 +1,10 @@
 #!/bin/bash
 # ===================================================================================================== 
-echo "init project"
+echo "deploy project"
 # ===================================================================================================== params
-# infra-config-file
-templateFile="./app/templates/config.tf"
-configFile="./configs/infra.json"
-targetFile="./infras/jetsi-infra/config.tf"
-moduleAutoConfig="./infras/jetsi-infra/.auto.tfvars.json"
-# ===================================================================================================== copy files
-cp $configFile $moduleAutoConfig
 # ===================================================================================================== start
-python app/scripts/generate-file-from-template.py $templateFile $configFile $targetFile
 cd ./infras/jetsi-infra
-terraform init
+terraform destroy -auto-approve
 cd ../..
 # =====================================================================================================
 # =====================================================================================================

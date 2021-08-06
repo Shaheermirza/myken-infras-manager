@@ -3,10 +3,10 @@
 
 terraform {
   backend "s3" {
-    profile = "myken_infras_manager"
-    bucket = "infras-deploy-repo-c1"
-    key    = "infras/jetsi-infra/terraform/terraform.tfstate"
-    region = "ap-south-1"
+    profile = "{{ stateBackend.profile }}"
+    bucket = "{{ stateBackend.bucket }}"
+    key    = "{{ stateBackend.key }}"
+    region = "{{ stateBackend.region }}"
   }
   required_providers {
     aws = {

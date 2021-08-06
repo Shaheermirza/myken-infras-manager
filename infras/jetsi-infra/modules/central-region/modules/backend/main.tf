@@ -7,7 +7,7 @@ data "aws_subnet_ids" "all" {
 }
 data "aws_ami" "manager_ami" {
   most_recent      = true
-  owners           = ["self"]
+  owners           = var.arrays.ami_owners
 
   filter {
     name   = "name"

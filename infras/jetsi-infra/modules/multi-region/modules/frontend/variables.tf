@@ -3,3 +3,8 @@ variable "module_region" {
   type        = string
   default = "null"
 }
+variable "arrays" {
+  description = "Module arrays var"
+  type        = map(list(string))
+  default     = {}
+}

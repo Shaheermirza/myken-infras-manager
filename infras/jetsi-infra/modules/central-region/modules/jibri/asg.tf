@@ -62,7 +62,8 @@ resource "aws_launch_configuration" "jibri" {
     associate_public_ip_address      = false
     ebs_optimized                    = false
     enable_monitoring                = false
-    iam_instance_profile             = "arn:aws:iam::988339190536:instance-profile/ASG_JIBRI_ROLE"
+    #iam_instance_profile             = "arn:aws:iam::988339190536:instance-profile/ASG_JIBRI_ROLE"
+    iam_instance_profile             = "arn:aws:iam::182695311751:instance-profile/ASG_JIBRI_ROLE"
     image_id                         = "ami-01af747a82cdd687c"
     instance_type                    = "t2.xlarge"
     key_name                         = "meet"
