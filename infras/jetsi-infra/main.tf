@@ -12,10 +12,6 @@ variable "stateBackend" {
 #=========================================================================================== backend
 terraform {
   backend "s3" {
-    profile = var.stateBackend.profile
-    bucket = var.stateBackend.bucket
-    key    = var.stateBackend.key
-    region = var.stateBackend.region
   }
   required_providers {
     aws = {
@@ -23,6 +19,15 @@ terraform {
       version = ">= 3.45.0"
       configuration_aliases = [ aws.london, aws.mumbai , aws.sydney ]
     }
+  }
+}
+data "terraform_remote_state" "state" {
+  backend = "s3"
+  config {
+    profile = var.stateBackend.profile
+    bucket = var.stateBackend.bucket
+    key    = var.stateBackend.key
+    region = var.stateBackend.region
   }
 }
 # terraform {

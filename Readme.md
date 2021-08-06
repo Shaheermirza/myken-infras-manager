@@ -44,6 +44,13 @@
                 "r0" : "ap-south-1",
                 "r1" : "eu-west-2",
                 "r2" : "ap-southeast-2"
+            },
+            "stateBackend" : {
+                "backend" : "s3",
+                "profile" : "myken_infras_manager",
+                "bucket" : "infras-deploy-repo-c0",
+                "key"    : "infras/jetsi-infra/terraform/terraform.tfstate",
+                "region" : "ap-south-1"
             }
         }
     ```
