@@ -9,12 +9,22 @@
         [myken_infras_manager] ; myken_infras_manager profile
         aws_access_key_id = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# case re-using same code for other project:
+    rm -rf .terraform/
+    rm -rf .terraform.lock.hcl
+
 # AWS setup
     check/change setup config on ${infra}/main.tf
-    Create bucket : 
-        bucket = "infras-deploy-repo-c0"
-    Create Folder on bucket for each infra ( to store the infra state change )
-        key    = "infras/jetsi-infra/terraform/terraform.tfstate"
+    S3 :
+        Create bucket : 
+            bucket = "infras-deploy-repo-c0"
+        Create Folder on bucket for each infra ( to store the infra state change )
+            key    = "infras/jetsi-infra/terraform/terraform.tfstate"
+    SSH
+        Create key with name meet in each region
+        import existing public keys : ssh-keygen -y -f KEYPAIR.pem
+
+    
 # infra config
     change directory to specific infra that you want to deploy , for exemple : jetsi infra :
     '''

@@ -5,14 +5,17 @@ variable "config" {
 variable "regions" {
     type = map(string)
 }
+variable "stateBackend" {
+    type = map(string)
+}
 
 #=========================================================================================== backend
 terraform {
   backend "s3" {
-    profile = "myken_infras_manager"
-    bucket = "infras-deploy-repo-c0"
-    key    = "infras/jetsi-infra/terraform/terraform.tfstate"
-    region = "ap-south-1"
+    profile = var.stateBackend.profile
+    bucket = var.stateBackend.bucket
+    key    = var.stateBackend.key
+    region = var.stateBackend.region
   }
   required_providers {
     aws = {
