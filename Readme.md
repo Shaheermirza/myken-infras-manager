@@ -1,4 +1,7 @@
-
+# server requirements
+    install terraform
+    install pip : sudo apt install python-pip
+    install jinja2 : pip install jinja2
 
 # global config
     
@@ -51,6 +54,9 @@
                 "bucket" : "infras-deploy-repo-c0",
                 "key"    : "infras/jetsi-infra/terraform/terraform.tfstate",
                 "region" : "ap-south-1"
+            },
+            "arrays" : {
+                "ami_owners" : ["self","988339190536","182695311751"]
             }
         }
     ```
