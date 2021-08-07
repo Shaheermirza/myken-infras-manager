@@ -10,9 +10,12 @@ module "vpc" {
 
   # enable_nat_gateway = true
   # enable_vpn_gateway = true
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
   tags = {
-    Terraform = "true"
-    Environment = "dev"
+      Name        = "main-vpc"
+      Terraform   = "true"
+      Environment = "dev"
   }
 }

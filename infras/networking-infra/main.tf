@@ -16,7 +16,8 @@ variable "arrays" {
 module "myken_networking_MR_mumbai" {
   source = "./modules/multi-region"
   providers = {
-    aws.current = aws.mumbai
+    aws = aws.mumbai
+    #aws.current = aws.mumbai
   }
   module_region = var.regions.r0
   arrays = var.arrays
@@ -25,7 +26,8 @@ module "myken_networking_MR_mumbai" {
 module "myken_networking_MR_london" {
   source = "./modules/multi-region"
   providers = {
-    aws.current = aws.london
+    aws = aws.london
+    #aws.current = aws.london
   }
   module_region = var.regions.r1
   arrays = var.arrays
@@ -34,7 +36,8 @@ module "myken_networking_MR_london" {
 module "myken_networking_MR_sydney" {
   source = "./modules/multi-region"
   providers = {
-    aws.current = aws.sydney
+    aws = aws.sydney
+    #aws.current = aws.sydney
   }
   module_region = var.regions.r2
   arrays = var.arrays

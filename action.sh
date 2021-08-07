@@ -3,7 +3,7 @@
 action=$1
 module=$2
 echo "init module $module"
-echo "usage : bash action.sh [action : init,plan,deploy,destroy] [module]"
+echo "usage : bash action.sh [action : init,clean,plan,deploy,destroy] [module]"
 # ===================================================================================================== check params
 ### Check if a directory does not exist ###
 if [ -z $action ] || [ -z $module ]
@@ -17,7 +17,7 @@ templateFile="./app/templates/config.tf"
 configFile="./configs/infra.json"
 
 modulePath="./infras/$module"
-targetFile="./infras/$module/config.tf"
+targetFile="./infras/$module/__config.tf"
 moduleAutoConfig="./infras/$module/.auto.tfvars.json"
 # ===================================================================================================== copy files
 ### Check if a directory does not exist ###
@@ -26,12 +26,31 @@ then
     echo "Module $module DOES NOT exists." 
     exit 1 # die with error code 9999
 fi
+# ===================================================================================================== helpers
+function getRandom (){
+    echo $(date +"%FT%H%M")
+}
 # ===================================================================================================== functions
 function init () {
-    cp $configFile $moduleAutoConfig
-    python app/scripts/generate-file-from-template.py $templateFile $configFile $targetFile
+    mkdir -p tmp
+    tmpConfigFile="./tmp/$(date +"%FT%H%M").json";
+    echo "creating tmp file $tmpConfigFile"
+    echo '{ "module" : "'$module'" }' > $tmpConfigFile;
+
+    python app/scripts/generate-file-from-template.py $configFile $tmpConfigFile $tmpConfigFile
+    cp $tmpConfigFile $moduleAutoConfig
+    python app/scripts/generate-file-from-template.py $templateFile $tmpConfigFile $targetFile
+
     cd ./infras/$module
     terraform init
+    cd ../..
+    rm -rf $tmpConfigFile;
+}
+function clean () {
+    cd ./infras/$module
+    rm -rf .terraform*
+    #terraform init -reconfigure
+    echo "module cleaned!"
     cd ../..
 }
 function plan () {
@@ -56,6 +75,9 @@ function exec () {
 
         init)
             init
+            ;;
+        clean)
+            clean
             ;;
         plan)
             plan

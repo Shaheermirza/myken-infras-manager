@@ -4,3 +4,5 @@ terraform.*
 .auto.tfvars.json
 .state.tmp
 configs/*.json
+tmp
+__config.tf
