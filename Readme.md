@@ -125,3 +125,15 @@
                 - security_group : jvb-v1--tf
                 - aws_launch_configuration : name : jvb-v1--tf
                 - aws_autoscaling_group : name : jvb-v1--tf
+
+### Networking
+    vpc_cidr_per_region = {
+        ap-south-1 = "10.0"
+        eu-west-2 = "10.1"
+        ap-southeast-2 = "10.2"
+        # ap-south-1 = "10.0.0.0/16"
+        # eu-west-2 = "10.1.0.0/16"
+        # ap-southeast-2 = "10.2.0.0/16"
+    }
+    private_subnets = [join("", [local.vpc_cidr_prefix,".1.0/24"]), join("", [local.vpc_cidr_prefix,".2.0/24"]), join("", [local.vpc_cidr_prefix,".3.0/24"])]
+    public_subnets  = [join("", [local.vpc_cidr_prefix,".101.0/24"]), join("", [local.vpc_cidr_prefix,".102.0/24"]), join("", [local.vpc_cidr_prefix,".103.0/24"])]

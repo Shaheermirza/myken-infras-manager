@@ -1,6 +1,10 @@
 //===================================================================================================== data
 data "aws_vpc" "default" {
-  default = true
+  #default = true
+  filter {
+    name   = "tag:Name"
+    values = ["main-vpc"]
+  }
 }
 data "aws_subnet_ids" "all" {
   vpc_id = data.aws_vpc.default.id
