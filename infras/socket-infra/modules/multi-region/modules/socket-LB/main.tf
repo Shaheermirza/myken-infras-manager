@@ -2,7 +2,11 @@
 # Data sources to get VPC, subnet, security group and AMI details
 ##################################################################
 data "aws_vpc" "default" {
-  default = true
+  #default = true
+  filter {
+    name   = "tag:Name"
+    values = ["main-vpc"]
+  }
 }
 
 data "aws_subnet_ids" "all" {
@@ -26,7 +30,7 @@ module "security_group" {
 
 data "aws_ami" "LB_ami" {
   most_recent      = true
-  owners           = ["self"]
+  owners           = var.arrays.ami_owners
 
   filter {
     name   = "name"

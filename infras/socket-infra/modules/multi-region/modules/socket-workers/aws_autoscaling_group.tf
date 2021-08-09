@@ -52,7 +52,7 @@ resource "aws_autoscaling_group" "main" {
   }
 
   tags = concat(
-    list(
+    tolist([
       {
         key                 = "Name"
         value               = var.asg_name
@@ -82,7 +82,7 @@ resource "aws_autoscaling_group" "main" {
         key                 = "ManagedBy"
         value               = "terraform"
         propagate_at_launch = false
-      }
+      }]
     ),
     var.asg_tags
   )

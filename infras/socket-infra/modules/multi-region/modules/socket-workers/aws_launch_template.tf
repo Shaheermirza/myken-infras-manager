@@ -1,6 +1,6 @@
 data "aws_ami" "worker_ami" {
   most_recent      = true
-  owners           = ["self"]
+  owners           = var.arrays.ami_owners
 
   filter {
     name   = "name"

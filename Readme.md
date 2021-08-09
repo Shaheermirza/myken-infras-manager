@@ -61,17 +61,17 @@
         }
     ```
 
-# Init
-    cd infras/jetsi-infra
-    terraform init
+# Init infra
+    bash action.sh init jetsi-infra
+
+# clean infra
+    bash action.sh clean jetsi-infra
 
 # Deploy infra
-    cd infras/jetsi-infra
-    terraform apply  -auto-approve
+    bash action.sh deploy jetsi-infra
 
 # Destroy infra
-    cd infras/jetsi-infra
-    terraform destroy  -auto-approve
+    bash action.sh deploy jetsi-infra
 
 
 
