@@ -24,13 +24,13 @@ module "myken_websocket_workers" {
 
   depends_on = [module.myken_websocket_LB]
 }
-module "myken_websocket_redis" {
-  source = "./modules/redis"
+# module "myken_websocket_redis" {
+#   source = "./modules/redis"
   
-  module_region = var.module_region
-  arrays = var.arrays
+#   module_region = var.module_region
+#   arrays = var.arrays
 
-  depends_on = [module.myken_websocket_workers]
-}
+#   depends_on = [module.myken_websocket_workers]
+# }
 
 #=========================================================================================== END

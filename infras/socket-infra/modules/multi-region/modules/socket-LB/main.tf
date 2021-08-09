@@ -52,7 +52,7 @@ resource "aws_instance" "this" {
   #name                       = "websocket-LB-v1"
   ami                         = data.aws_ami.LB_ami.id
   instance_type               = "t2.small"
-  subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
+  #subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
   key_name                    = "meet"
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
