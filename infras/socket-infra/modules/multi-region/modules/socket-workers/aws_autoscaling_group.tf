@@ -5,7 +5,7 @@ resource "aws_autoscaling_group" "main" {
   default_cooldown          = var.asg_default_cooldown
   health_check_grace_period = var.asg_health_check_grace_period
   health_check_type         = var.asg_health_check_type
-  #vpc_zone_identifier       = local.subnets
+  vpc_zone_identifier       = local.subnets
   #target_group_arns         = var.asg_lb_target_group_arns
   #load_balancers            = var.asg_clb_names
   termination_policies      = var.asg_termination_policies
