@@ -61,11 +61,14 @@
         }
     ```
 
+# clean infra
+    bash action.sh clean jetsi-infra
+
 # Init infra
     bash action.sh init jetsi-infra
 
-# clean infra
-    bash action.sh clean jetsi-infra
+# refresh infra
+    bash action.sh refresh jetsi-infra
 
 # Deploy infra
     bash action.sh deploy jetsi-infra

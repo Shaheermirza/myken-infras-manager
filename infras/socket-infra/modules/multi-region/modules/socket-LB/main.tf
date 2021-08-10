@@ -17,7 +17,14 @@ data "aws_eip" "LB_ip" {
     values = ["websocket-LB-ip"]
   }
 }
-
+data "template_file" "init" {
+  template = "${file("${path.module}/data/socket-LB.user-data.sh")}"
+  vars = {
+    region = var.module_region
+    aws_user_access_key = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"access_key")
+    aws_user_secret_key = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"secret_key")
+  }
+}
 #================================================================================================= ressources
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
@@ -44,6 +51,7 @@ resource "aws_instance" "this" {
   associate_public_ip_address = true
 
   #user_data_base64 = base64encode(local.user_data)
+  user_data = base64encode(data.template_file.init.rendered)
 
   tags = {
     "Name"      = data.aws_ami.LB_ami.name

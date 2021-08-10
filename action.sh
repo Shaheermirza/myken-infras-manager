@@ -3,7 +3,7 @@
 action=$1
 module=$2
 echo "init module $module"
-echo "usage : bash action.sh [action : init,clean,plan,deploy,destroy] [module]"
+echo "usage : bash action.sh [action : init,clean,plan,refresh,deploy,destroy] [module]"
 # ===================================================================================================== check params
 ### Check if a directory does not exist ###
 if [ -z $action ] || [ -z $module ]
@@ -58,6 +58,11 @@ function plan () {
     terraform plan
     cd ../..
 }
+function refresh () {
+    cd ./infras/$module
+    terraform apply -refresh-only -auto-approve
+    cd ../..
+}
 function deploy () {
     cd ./infras/$module
     terraform apply -auto-approve
@@ -81,6 +86,9 @@ function exec () {
             ;;
         plan)
             plan
+            ;;
+        refresh)
+            refresh
             ;;
         deploy)
             deploy

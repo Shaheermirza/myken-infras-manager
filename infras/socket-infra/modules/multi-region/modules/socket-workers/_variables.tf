@@ -8,3 +8,8 @@ variable "arrays" {
   type        = map(list(string))
   default     = {}
 }
+variable "maps" {
+  description = "Module maps var"
+  type        = map(map(map(string)))
+  default     = {}
+}
