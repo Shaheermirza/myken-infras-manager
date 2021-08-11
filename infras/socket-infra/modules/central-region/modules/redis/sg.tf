@@ -1,10 +1,10 @@
-data  "aws_security_group" "websocket_workers" {
+# data  "aws_security_group" "websocket_workers" {
 
-  filter {
-    name   = "tag:Name"
-    values = ["websocket-workers-v*"]
-  }
-}
+#   filter {
+#     name   = "tag:Name"
+#     values = ["websocket-workers-v*"]
+#   }
+# }
 # data "aws_subnet" "selected" {
 #   id = var.subnet_id
 # }

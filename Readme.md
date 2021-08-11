@@ -128,6 +128,13 @@
                 - security_group : jvb-v1--tf
                 - aws_launch_configuration : name : jvb-v1--tf
                 - aws_autoscaling_group : name : jvb-v1--tf
+        - recorder :
+            - requirments :
+                - ami : name : recorder-manager-v* , web-recorder-worker-v*
+                - eip : tag:Name : recorder-manager-ip
+            - generated :
+                - security_group : recorder-manager-v0--tf , web-recorder-workers--tf
+                - aws_instance : tag:Name : recorder-manager-v0--tf , web-recorder-worker-v*
 
 ### Networking
     vpc_cidr_per_region = {
