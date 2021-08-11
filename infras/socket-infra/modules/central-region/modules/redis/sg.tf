@@ -8,6 +8,11 @@ data  "aws_security_group" "websocket_workers" {
 # data "aws_subnet" "selected" {
 #   id = var.subnet_id
 # }
+variable service_ports {
+  type        = list
+  default     = [6379,22]
+  description = "description"
+}
 
 resource  "aws_security_group" "redis" {
 
@@ -15,13 +20,16 @@ resource  "aws_security_group" "redis" {
   description = "Security group for redis"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress {
-    description = "redis port from socket workers SG"
-    #cidr_blocks = [data.aws_subnet.selected.cidr_block]
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    security_groups = [data.aws_security_group.websocket_workers.id]
+  dynamic "ingress" {
+    for_each = var.service_ports
+    content {
+      description = "redis port from socket workers SG"
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+      #security_groups = [data.aws_security_group.websocket_workers.id]
+      cidr_blocks = ["10.0.0.0/16"]
+    }
   }
 
   egress {
