@@ -5,6 +5,9 @@ data  "aws_security_group" "websocket_workers" {
     values = ["websocket-workers-v*"]
   }
 }
+# data "aws_subnet" "selected" {
+#   id = var.subnet_id
+# }
 
 resource  "aws_security_group" "redis" {
 
@@ -14,6 +17,7 @@ resource  "aws_security_group" "redis" {
 
   ingress {
     description = "redis port from socket workers SG"
+    #cidr_blocks = [data.aws_subnet.selected.cidr_block]
     from_port   = 6379
     to_port     = 6379
     protocol    = "tcp"

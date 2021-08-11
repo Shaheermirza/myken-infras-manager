@@ -22,7 +22,7 @@ data "template_file" "init" {
   vars = {
     region = var.module_region
     aws_user_access_key = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"access_key")
-    aws_user_secret_key = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"secret_key")
+    aws_user_access_secret = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"secret_key")
   }
 }
 #================================================================================================= ressources
@@ -35,7 +35,7 @@ module "security_group" {
   vpc_id      = data.aws_vpc.default.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["https-443-tcp"]
+  ingress_rules       = ["https-443-tcp","ssh-tcp"]
   egress_rules        = ["all-all"]
 }
 
