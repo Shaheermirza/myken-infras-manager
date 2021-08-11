@@ -5,31 +5,34 @@ data  "aws_security_group" "websocket_LB" {
     values = ["websocket-LB-v*"]
   }
 }
-resource "aws_security_group_rule" "http" {
-  type              = "ingress"
-  from_port         = 9001
-  to_port           = 9001
-  protocol          = "tcp"
-  security_group_id = data.aws_security_group.websocket_LB.id
+variable service_ports {
+  type        = list
+  default     = [9001,22]
+  description = "description"
 }
-resource "aws_security_group_rule" "ssh" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  security_group_id = data.aws_security_group.websocket_LB.id
-}
-module "security_group" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+
+resource  "aws_security_group" "websocket_workers" {
 
   name        = "websocket-workers-v0"
   description = "Security group for websocket workers"
   vpc_id      = data.aws_vpc.default.id
 
-  computed_ingress_with_source_security_group_id = [aws_security_group_rule.http.id,aws_security_group_rule.ssh.id]
+  dynamic "ingress" {
+    for_each = var.service_ports
+    content {
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+      security_groups = [data.aws_security_group.websocket_LB.id]
+    }
+  }
 
-  egress_rules        = ["all-all"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags = {
     Name = "websocket-workers-v0"

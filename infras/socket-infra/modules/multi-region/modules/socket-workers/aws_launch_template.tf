@@ -24,10 +24,10 @@ resource "aws_launch_template" "main" {
   key_name  = "meet"
   #user_data = base64encode(var.user_data)
 
-  vpc_security_group_ids = [module.security_group.this_security_group_id]
+  #breask:vpc_security_group_ids = [aws_security_group.websocket_workers.id]
   network_interfaces {
     associate_public_ip_address = false
-    security_groups             = [module.security_group.this_security_group_id]
+    security_groups             = [aws_security_group.websocket_workers.id]
     delete_on_termination       = true
   }
 
