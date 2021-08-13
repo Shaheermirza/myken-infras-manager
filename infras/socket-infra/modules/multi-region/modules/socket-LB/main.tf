@@ -21,8 +21,8 @@ data "template_file" "init" {
   template = "${file("${path.module}/data/socket-LB.user-data.sh")}"
   vars = {
     region = var.module_region
-    aws_user_access_key = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"access_key")
-    aws_user_access_secret = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"secret_key")
+    aws_user_access_key = lookup(lookup(lookup(var.maps,"users"),"websocket-scaler"),"access_key")
+    aws_user_access_secret = lookup(lookup(lookup(var.maps,"users"),"websocket-scaler"),"secret_key")
   }
 }
 #================================================================================================= ressources

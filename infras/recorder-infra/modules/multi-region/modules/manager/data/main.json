@@ -1,0 +1,48 @@
+{
+    "pool" : {
+        "unitsPerNode" : 2,
+        "minExecUnitsRequired" : 14,
+        "maxNodes" : 28
+    },
+    "service" : {},
+    "infra" : {
+        "provider" : {
+            "name" : "aws",
+            "region" : "${region}"
+        },
+        "pool" : {
+            "id" : "web-recorder-workers-c0"
+        },
+        "instanceParams" : {
+            "ImageId" : "${aws_worker_ami_id}", 
+            "InstanceType" : "t2.xlarge",
+            "KeyName" : "meet",
+            "MinCount" : 1,
+            "MaxCount" : 1,
+            "SecurityGroups" : ["web-recorder-workers"],
+            "TagSpecifications": [
+                {
+                    "ResourceType": "instance", 
+                    "Tags" : [
+                        {
+                            "Key": "Name", 
+                            "Value": "web-recorder-worker"
+                        },
+                        {
+                            "Key": "project", 
+                            "Value": "web-recorder"
+                        },
+                        {
+                            "Key": "role", 
+                            "Value": "worker"
+                        },
+                        {
+                            "Key": "poolId", 
+                            "Value": "web-recorder-workers-c0"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
