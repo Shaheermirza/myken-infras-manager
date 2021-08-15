@@ -1,10 +1,4 @@
 //===================================================================================================== data
-data "aws_vpc" "default" {
-  default = true
-}
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
-}
 data "aws_ami" "manager_ami" {
   most_recent      = true
   owners           = var.arrays.ami_owners
@@ -45,6 +39,7 @@ data "template_file" "json" {
   template = "${file("${path.module}/data/main.json")}"
   vars = {
     region = var.module_region
+    subnetId = local.subnets[0]
     aws_worker_ami_id = data.aws_ami.worker_ami.id
   }
 }
@@ -83,7 +78,7 @@ module "security_group" {
 resource "aws_instance" "this" {
   ami                         = data.aws_ami.manager_ami.id
   instance_type               = "t2.small"
-  subnet_id     = tolist(data.aws_subnet_ids.all.ids)[1]
+  subnet_id     = local.subnets[0]
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
   key_name                    = "meet"
   vpc_security_group_ids      = [module.security_group.this_security_group_id]

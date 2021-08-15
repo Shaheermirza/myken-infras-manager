@@ -5,6 +5,7 @@
         "maxNodes" : 28
     },
     "service" : {},
+    "debug" : { "test" : true },
     "infra" : {
         "provider" : {
             "name" : "aws",
@@ -14,12 +15,13 @@
             "id" : "web-recorder-workers-c0"
         },
         "instanceParams" : {
-            "ImageId" : "${aws_worker_ami_id}", 
+            "ImageId" : "${aws_worker_ami_id}",
+            "SubnetId" : "${subnetId}",
             "InstanceType" : "t2.xlarge",
             "KeyName" : "meet",
             "MinCount" : 1,
             "MaxCount" : 1,
-            "SecurityGroups" : ["web-recorder-workers"],
+            "SecurityGroups" : ["web-recorder-workers--tf"],
             "TagSpecifications": [
                 {
                     "ResourceType": "instance", 
