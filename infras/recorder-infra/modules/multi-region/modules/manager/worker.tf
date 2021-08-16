@@ -1,14 +1,5 @@
-
-//===================================================================================================== data
-data  "aws_security_group" "recorder_manager" {
-
-  filter {
-    name   = "tag:Name"
-    values = ["recorder-manager-v0--tf"]
-  }
-}
 //===================================================================================================== main
-resource  "aws_security_group" "allow_recorder_manager_to_workers" {
+resource  "aws_security_group" "recorder_workers" {
 
   name        = "web-recorder-workers--tf"
   description = "Security group for Recorder workers"
@@ -19,7 +10,7 @@ resource  "aws_security_group" "allow_recorder_manager_to_workers" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    security_groups = [data.aws_security_group.recorder_manager.id]
+    security_groups = [module.security_group_manager.this_security_group_id]
   }
 
   egress {
@@ -31,8 +22,8 @@ resource  "aws_security_group" "allow_recorder_manager_to_workers" {
   }
 
   tags = {
-    "Name"      = "recorder-workers--tf"
-    "Role"      = "recorder-workers"
+    "Name"      = "web-recorder-workers--tf"
+    "Role"      = "web-recorder-workers"
     "Env"       = "prod"
     "managedBy" : "myken-infras-manger@terrafom",
   }

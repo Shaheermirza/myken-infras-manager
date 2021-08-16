@@ -25,6 +25,7 @@ data "aws_eip" "manager_ip" {
     values = ["recorder-manager-ip"]
   }
 }
+//===================================================================================================== templates
 data "template_file" "init" {
   template = "${file("${path.module}/data/main.sh")}"
   vars = {
@@ -39,13 +40,17 @@ data "template_file" "json" {
   template = "${file("${path.module}/data/main.json")}"
   vars = {
     region = var.module_region
+
     subnetId = local.subnets[0]
+    SecurityGroupId = aws_security_group.recorder_workers.id
+    VpcId = data.aws_vpc.default.id
+
     aws_worker_ami_id = data.aws_ami.worker_ami.id
   }
 }
 //===================================================================================================== prep
 
-module "security_group" {
+module "security_group_manager" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.0"
 
@@ -81,7 +86,7 @@ resource "aws_instance" "this" {
   subnet_id     = local.subnets[0]
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
   key_name                    = "meet"
-  vpc_security_group_ids      = [module.security_group.this_security_group_id]
+  vpc_security_group_ids      = [module.security_group_manager.this_security_group_id]
   associate_public_ip_address = true
 
   #user_data_base64 = base64encode(local.user_data)

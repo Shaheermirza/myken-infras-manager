@@ -19,7 +19,8 @@ rm -rf /home/ubuntu/.pm2/logs/*
 cd /data/apps/task-manager
 
 docker-compose stop
-docker-compose rm -f
+docker-compose rm -f -v
+sudo rm -rf ./.docke r/mongodb/data/db/
 docker-compose up -d
 
 git reset --hard HEAD

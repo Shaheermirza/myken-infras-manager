@@ -14,14 +14,19 @@
         "pool" : {
             "id" : "web-recorder-workers-c0"
         },
+        "infos" : {
+            "VpcId" : "${VpcId}",
+            "SubnetId" : "${subnetId}",
+            "SecurityGroups" : ["web-recorder-workers--tf"]
+        },
         "instanceParams" : {
             "ImageId" : "${aws_worker_ami_id}",
+            "SecurityGroupIds" : ["${SecurityGroupId}"],
             "SubnetId" : "${subnetId}",
             "InstanceType" : "t2.xlarge",
             "KeyName" : "meet",
             "MinCount" : 1,
             "MaxCount" : 1,
-            "SecurityGroups" : ["web-recorder-workers--tf"],
             "TagSpecifications": [
                 {
                     "ResourceType": "instance", 
