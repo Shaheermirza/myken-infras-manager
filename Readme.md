@@ -104,7 +104,7 @@
                 - aws_instance : tag:Name : meetBack-v0--tf
         - Jibri :
             - requirments :
-                - ami : id : ami-01af747a82cdd687c
+                - ami : id : ami-03d7a5a64a61e1807
             - generated :
                 - security_group : jibri-sg-v1--tf
                 - aws_launch_configuration : name : jibri-v5--tf
