@@ -32,9 +32,12 @@ locals {
     env = "prod"
 
     ami_per_region = {
-        ap-south-1 = "ami-01f26dba3a93268e3"
-        eu-west-2 = "ami-0262f3eaca3ff4402"
-        ap-southeast-2 = "ami-057d90b2321c05951"
+       //ap-south-1 = "ami-01f26dba3a93268e3" 
+        ap-south-1 = "ami-0c09a5000090ca995"
+        //eu-west-2 = "ami-0262f3eaca3ff4402"
+        eu-west-2 = "ami-0aa60f80278038659"
+        ap-southeast-2 = "ami-0ff2f935bc3f4eaf4"
+        //ap-southeast-2 = "ami-057d90b2321c05951"       
     }
 
     ami_id = local.ami_per_region[var.module_region]
