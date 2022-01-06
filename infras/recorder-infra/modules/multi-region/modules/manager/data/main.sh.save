@@ -1,5 +1,4 @@
-#cloud-boothook
-#!/bin/bash 
+#cloud-boothook !/bin/bash 
 #========================================================================================================== params
 RANDOM_NUM=$(awk -v min=1 -v max=9999999999 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')
 echo $RANDOM_NUM
@@ -10,19 +9,12 @@ echo $NICK_NAME
 #========================================================================================================== set /home/ubuntu/.aws/credentials
 
 mkdir /opt/deployer -p
-rm -rf /opt/deployer/*;
 
-cat <<-EOT > /opt/deployer/deploy.sh
-#!/bin/bash
-echo "starting deployer ..."
-echo $(date)
-echo "USER : $(whoami)"
-
-startTime="$(TZ=UTC0 printf '%(%s)T\n' '-1')"
+cat <<EOT > /opt/deployer/deploy.sh
 
 pm2 stop all
 pm2 flush all
-rm -rf /home/ubuntu/.pm2/logs/*;
+rm -rf /home/ubuntu/.pm2/logs/*
 
 cd /data/apps/task-manager
 
@@ -46,14 +38,11 @@ echo "aws_secret_access_key = ${aws_user_access_secret}" >> /home/ubuntu/.aws/cr
 
 #sleep 1m
 pm2 restart all
-echo "Deployer ended successfully."
 EOT
 
 chown ubuntu:ubuntu /opt/deployer -R
 
-service docker start
-sudo -i -u ubuntu bash -c "bash /opt/deployer/deploy.sh &> /opt/deployer/output.log"
-#sudo -i -u ubuntu bash -c "bash /opt/deployer/deploy.sh 1> /opt/deployer/output.log 2> /opt/deployer/error.log"
+sudo -i -u ubuntu bash -c "bash /opt/deployer/deploy.sh > /opt/deployer/deploy.log"
 
 #==========================================================================================================
 #==========================================================================================================
