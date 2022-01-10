@@ -10,7 +10,7 @@ resource  "aws_security_group" "recorder_workers" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    security_groups = [module.security_group_manager.this_security_group_id]
+    security_groups = [aws_security_group.manager.id]
   }
 
   egress {

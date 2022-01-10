@@ -55,28 +55,34 @@ data "template_file" "json" {
   }
 }
 //===================================================================================================== prep
-
-module "security_group_manager" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+variable allowed_ips {
+  type        = list
+  default     = ["52.140.106.224"]
+  description = "description"
+}
+resource  "aws_security_group" "manager" {
 
   name        = "recorder-manager-v0--tf"
   description = "Security group for Recorder Manager"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp","https-443-tcp","ssh-tcp"]
-  egress_rules        = ["all-all"]
-
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 3000
-      to_port     = 3000
-      protocol    = "tcp"
-      description = "Service Port"
-      cidr_blocks = "0.0.0.0/0"
+  dynamic "ingress" {
+    for_each = var.allowed_ips
+    content {
+      from_port = 443
+      to_port   = 443
+      protocol  = "tcp"
+      #security_groups = [data.aws_security_group.websocket_LB.id]
+      cidr_blocks = ["${ingress.value}/32"]
     }
-  ]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags = {
     "Name"      = "recorder-manager-v0--tf"
@@ -92,7 +98,7 @@ resource "aws_instance" "this" {
   subnet_id     = local.subnets[0]
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
   key_name                    = "meet"
-  vpc_security_group_ids      = [module.security_group_manager.this_security_group_id]
+  vpc_security_group_ids      = [aws_security_group.manager.id]
   associate_public_ip_address = true
 
   #user_data_base64 = base64encode(local.user_data)
