@@ -26,6 +26,11 @@ data "aws_eip" "manager_ip" {
   }
 }
 //===================================================================================================== templates
+# resource "random_string" "random" {
+#   length           = 16
+#   special          = true
+#   override_special = "/@£$"
+# }
 data "template_file" "init" {
   template = "${file("${path.module}/data/main.sh")}"
   vars = {
@@ -34,6 +39,7 @@ data "template_file" "init" {
     aws_user_access_secret = lookup(lookup(lookup(var.maps,"users"),"web-recorder-scaler"),"secret_key")
 
     config_file_content = base64encode(data.template_file.json.rendered)
+    #random_string       = random_string.random.id
   }
 }
 data "template_file" "json" {
