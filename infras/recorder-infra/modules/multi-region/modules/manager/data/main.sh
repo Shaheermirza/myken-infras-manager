@@ -45,6 +45,7 @@ echo "aws_access_key_id = ${aws_user_access_key}" >> /home/ubuntu/.aws/credentia
 echo "aws_secret_access_key = ${aws_user_access_secret}" >> /home/ubuntu/.aws/credentials
 
 #sleep 1m
+sleep 15;
 pm2 restart all
 echo "Deployer ended successfully."
 EOT
@@ -52,6 +53,7 @@ EOT
 chown ubuntu:ubuntu /opt/deployer -R
 
 service docker start
+sleep 15;
 sudo -i -u ubuntu bash -c "bash /opt/deployer/deploy.sh &> /opt/deployer/output.log"
 #sudo -i -u ubuntu bash -c "bash /opt/deployer/deploy.sh 1> /opt/deployer/output.log 2> /opt/deployer/error.log"
 
