@@ -1,0 +1,1 @@
+docker run -it -v $(pwd):/app -v /home/debian/.aws/:/root/.aws  yoletech/terrafrom 
