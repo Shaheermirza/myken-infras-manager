@@ -98,7 +98,7 @@ resource "aws_instance" "this" {
   instance_type               = "t2.xlarge"
   subnet_id     = tolist(data.aws_subnet_ids.all.ids)[1]
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
-  key_name                    = "meet"
+  key_name                    = "mykensho"
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
 

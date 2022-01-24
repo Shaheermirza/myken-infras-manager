@@ -66,7 +66,7 @@ resource "aws_launch_configuration" "jibri" {
     iam_instance_profile             = "arn:aws:iam::182695311751:instance-profile/ASG_JIBRI_ROLE"
     image_id                         = "ami-03d7a5a64a61e1807"
     instance_type                    = "t2.xlarge"
-    key_name                         = "meet"
+    key_name                         = "mykensho"
     security_groups                  = [aws_security_group.jibri.id]
     user_data = filebase64("${path.module}/data/lauch-template.user-data.sh")
     vpc_classic_link_security_groups = []

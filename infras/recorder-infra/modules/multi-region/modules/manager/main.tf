@@ -97,7 +97,7 @@ resource "aws_instance" "this" {
   instance_type               = "t2.small"
   subnet_id     = local.subnets[0]
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
-  key_name                    = "meet"
+  key_name                    = "mykensho"
   vpc_security_group_ids      = [aws_security_group.manager.id]
   associate_public_ip_address = true
 

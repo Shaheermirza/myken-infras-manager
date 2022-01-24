@@ -61,7 +61,7 @@ resource "aws_launch_configuration" "subject" {
     #iam_instance_profile             = "arn:aws:iam::988339190536:instance-profile/ASG_subject_ROLE"
     image_id                         = local.ami_id
     instance_type                    = local.instanceType
-    key_name                         = "meet"
+    key_name                         = "mykensho"
     security_groups                  = [aws_security_group.subject.id]
     #user_data                        = "c6800251b5d7bb0c1dd88caaf4f26e7089998c80"
     vpc_classic_link_security_groups = []
