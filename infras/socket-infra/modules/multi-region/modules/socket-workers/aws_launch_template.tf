@@ -21,7 +21,7 @@ resource "aws_launch_template" "main" {
     #cpu_credits = var.cpu_credits
   }
 
-  key_name  = "meet"
+  key_name  = "mykensho"
   #user_data = base64encode(var.user_data)
 
   #breask:vpc_security_group_ids = [aws_security_group.websocket_workers.id]

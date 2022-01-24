@@ -24,7 +24,7 @@
             "SecurityGroupIds" : ["${SecurityGroupId}"],
             "SubnetId" : "${subnetId}",
             "InstanceType" : "t2.xlarge",
-            "KeyName" : "meet",
+            "KeyName" : "mykensho",
             "MinCount" : 1,
             "MaxCount" : 1,
             "TagSpecifications": [
