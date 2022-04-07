@@ -16,7 +16,7 @@ variable "maps" {
 }
 #=========================================================================================== multi region
 #mumbai:ap-south-1
-module "myken_recorder_MR_mumbai" {
+module "myken_recorder_MR_mumbai_all" {
   source = "./modules/multi-region"
   providers = {
     aws = aws.mumbai
@@ -26,7 +26,7 @@ module "myken_recorder_MR_mumbai" {
   maps = var.maps
 }
 #london:eu-west-2
-module "myken_recorder_MR_london" {
+module "myken_recorder_MR_london_all" {
   source = "./modules/multi-region"
   providers = {
     aws = aws.london
@@ -36,7 +36,7 @@ module "myken_recorder_MR_london" {
   maps = var.maps
 }
 #sydney:ap-southeast-2
-module "myken_recorder_MR_sydney" {
+module "myken_recorder_MR_sydney_all" {
   source = "./modules/multi-region"
   providers = {
     aws = aws.sydney
