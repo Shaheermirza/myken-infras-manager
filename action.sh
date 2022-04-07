@@ -37,8 +37,17 @@ function init () {
     tmpConfigFile="./tmp/$(date +"%FT%H%M").json";
     echo "creating tmp file $tmpConfigFile"
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
-    
-    sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
+    case "$region" in
+   "all") sudo mv ./app/infras/$module/all.tf ./infras/$module/main.tf
+   ;;
+   "mumbai") sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
+   ;;
+   "sydney") sudo mv ./app/infras/$module/sydney.tf ./infras/$module/main.tf 
+   ;;
+   "london") sudo mv ./app/infras/$module/london.tf ./infras/$module/main.tf 
+   ;;
+esac
+    #sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
     python app/scripts/generate-file-from-template.py $configFile $tmpConfigFile $tmpConfigFile
     cp $tmpConfigFile $moduleAutoConfig
     python app/scripts/generate-file-from-template.py $templateFile $tmpConfigFile $targetFile
