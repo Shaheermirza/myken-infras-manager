@@ -46,7 +46,7 @@ function init () {
     sudo cp ./app/infras/$module/worker-json/main.json ./infras/$module/modules/multi-region/modules/manager/data/main.json
     sudo sed -i 's/t2.xlarge/'$serversize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
     sudo sed -i 's/minnodesize/'$minsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
-    sudo sed -i 's/maznodesize/'$maxsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
+    sudo sed -i 's/maxnodesize/'$maxsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
     case "$region" in
    "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
    ;;
