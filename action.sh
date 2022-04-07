@@ -4,6 +4,8 @@ action=$1
 module=$2
 region=$3
 serversize=$4
+minsize=$5
+maxsize=$6
 echo "init module $module"
 echo "usage : bash action.sh [action : init,clean,plan,refresh,deploy,destroy] [module]"
 # ===================================================================================================== check params
@@ -43,6 +45,8 @@ function init () {
     
     sudo cp ./app/infras/$module/worker-json/main.json ./infras/$module/modules/multi-region/modules/manager/data/main.json
     sudo sed -i 's/t2.xlarge/'$serversize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
+    sudo sed -i 's/minnodesize/'$minsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
+    sudo sed -i 's/maznodesize/'$maxsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
     case "$region" in
    "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
    ;;

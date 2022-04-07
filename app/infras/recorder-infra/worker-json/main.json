@@ -1,8 +1,8 @@
 {
     "pool" : {
         "unitsPerNode" : 1,
-        "minExecUnitsRequired" : 1,
-        "maxNodes" : 1
+        "minExecUnitsRequired" :minnodesize,
+        "maxNodes" : maxnodesize
     },
     "service" : {},
     "debug" : { "test" : true },
