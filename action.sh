@@ -37,7 +37,7 @@ function init () {
     tmpConfigFile="./tmp/$(date +"%FT%H%M").json";
     echo "creating tmp file $tmpConfigFile"
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
-    cp ./infras/$module/mumbai.tf ./infras/$module/main.tf
+    mv ./infras/$module/mumbai.tf ./infras/$module/main.tf
     python app/scripts/generate-file-from-template.py $configFile $tmpConfigFile $tmpConfigFile
     cp $tmpConfigFile $moduleAutoConfig
     python app/scripts/generate-file-from-template.py $templateFile $tmpConfigFile $targetFile
