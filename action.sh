@@ -39,7 +39,7 @@ function init () {
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
     if [ $module == "recorder-infra" ]
     then
-    sudo cp ./app/infras/$module/worker-json/main.json ./infras/$module/modeuls/multi-region/modules/manager/data/main.json
+    sudo cp ./app/infras/$module/worker-json/main.json ./infras/$module/modules/multi-region/modules/manager/data/main.json
 
     case "$region" in
    "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
