@@ -25,24 +25,24 @@ module "myken_recorder_MR_mumbai" {
   arrays = var.arrays
   maps = var.maps
 }
-#london:eu-west-2
-module "myken_recorder_MR_london" {
-  source = "./modules/multi-region"
-  providers = {
-    aws = aws.london
-  }
-  module_region = var.regions.r1
-  arrays = var.arrays
-  maps = var.maps
-}
-#sydney:ap-southeast-2
-module "myken_recorder_MR_sydney" {
-  source = "./modules/multi-region"
-  providers = {
-    aws = aws.sydney
-  }
-  module_region = var.regions.r2
-  arrays = var.arrays
-  maps = var.maps
-}
+# #london:eu-west-2
+# module "myken_recorder_MR_london" {
+#   source = "./modules/multi-region"
+#   providers = {
+#     aws = aws.london
+#   }
+#   module_region = var.regions.r1
+#   arrays = var.arrays
+#   maps = var.maps
+# }
+# #sydney:ap-southeast-2
+# module "myken_recorder_MR_sydney" {
+#   source = "./modules/multi-region"
+#   providers = {
+#     aws = aws.sydney
+#   }
+#   module_region = var.regions.r2
+#   arrays = var.arrays
+#   maps = var.maps
+# }
 #=========================================================================================== END
