@@ -40,8 +40,7 @@ function init () {
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
     if [ $module == "recorder-infra" ]
     then
-    sudo sed -i 's/t2.xlarge/'+$serversize+'/g' ./app/infras/$module/worker-json/main.json
-    sudo cp ./app/infras/$module/worker-json/main.json ./infras/$module/modules/multi-region/modules/manager/data/main.json
+    sudo sed -i 's/t2.xlarge/'+$serversize+'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
 
     case "$region" in
    "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
