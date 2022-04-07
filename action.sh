@@ -37,7 +37,7 @@ function init () {
     tmpConfigFile="./tmp/$(date +"%FT%H%M").json";
     echo "creating tmp file $tmpConfigFile"
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
-    cat <<EOF >./infras/$module/main.tf
+   sudo cat <<EOF >./infras/$module/main.tf
 #=========================================================================================== config
 variable "config" {
     type = map(string)
