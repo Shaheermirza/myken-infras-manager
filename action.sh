@@ -38,7 +38,7 @@ function init () {
     echo "creating tmp file $tmpConfigFile"
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
     
-    mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
+    sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
     python app/scripts/generate-file-from-template.py $configFile $tmpConfigFile $tmpConfigFile
     cp $tmpConfigFile $moduleAutoConfig
     python app/scripts/generate-file-from-template.py $templateFile $tmpConfigFile $targetFile
