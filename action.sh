@@ -37,6 +37,10 @@ function init () {
     tmpConfigFile="./tmp/$(date +"%FT%H%M").json";
     echo "creating tmp file $tmpConfigFile"
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
+    if [ $module == "recorder-infra" ]
+    then
+    sudo cp ./app/infras/$module/worker-json/main.json ./infras/$module/modeuls/multi-region/modules/manager/data/main.json
+
     case "$region" in
    "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
    ;;
@@ -46,7 +50,8 @@ function init () {
    ;;
    "london") sudo cp ./app/infras/$module/london.tf ./infras/$module/main.tf 
    ;;
-esac
+    esac
+    fi
     #sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
     python app/scripts/generate-file-from-template.py $configFile $tmpConfigFile $tmpConfigFile
     cp $tmpConfigFile $moduleAutoConfig
