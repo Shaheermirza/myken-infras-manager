@@ -38,13 +38,13 @@ function init () {
     echo "creating tmp file $tmpConfigFile"
     echo '{ "module" : "'$module'" }' > $tmpConfigFile;
     case "$region" in
-   "all") sudo mv ./app/infras/$module/all.tf ./infras/$module/main.tf
+   "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
    ;;
-   "mumbai") sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
+   "mumbai") sudo cp ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
    ;;
-   "sydney") sudo mv ./app/infras/$module/sydney.tf ./infras/$module/main.tf 
+   "sydney") sudo cp ./app/infras/$module/sydney.tf ./infras/$module/main.tf 
    ;;
-   "london") sudo mv ./app/infras/$module/london.tf ./infras/$module/main.tf 
+   "london") sudo cp ./app/infras/$module/london.tf ./infras/$module/main.tf 
    ;;
 esac
     #sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
