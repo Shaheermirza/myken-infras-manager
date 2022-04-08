@@ -12,7 +12,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = ">= 3.45.0"
-      configuration_aliases = [ aws.london, aws.mumbai ]
+      configuration_aliases = [ aws.london, aws.mumbai , aws.sydney ]
     }
   }
 }
