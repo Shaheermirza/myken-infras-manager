@@ -87,7 +87,7 @@ function refresh () {
 }
 function deploy () {
     cd ./infras/$module
-    terraform apply -auto-approve
+    terraform apply -auto-approve 
     cd ../..
 }
 function destroy () {
