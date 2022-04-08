@@ -10,13 +10,13 @@ provider "aws" {
 #   value = var.config
 # }
 #=========================================================================================== provider.regions
-# provider "aws" {
-#     region = var.regions.r0
-#     alias  = "mumbai"
-#     access_key = var.config.access_key
-#     secret_key = var.config.secret_key
-#     profile = var.config.profile
-# }
+provider "aws" {
+    region = var.regions.r0
+    alias  = "mumbai"
+    access_key = var.config.access_key
+    secret_key = var.config.secret_key
+    profile = var.config.profile
+}
 provider "aws" {
     region = var.regions.r1
     alias  = "london"
