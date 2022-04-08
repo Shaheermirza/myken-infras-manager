@@ -1,7 +1,7 @@
 //===================================================================================================== main
 resource  "aws_security_group" "recorder_workers" {
 
-  name        = "web-recorder-workers--tf"
+  name        = "web-recorder-workers--tf-${terraform.workspace}"
   description = "Security group for Recorder workers"
   vpc_id      = data.aws_vpc.default.id
 

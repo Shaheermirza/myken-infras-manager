@@ -62,7 +62,7 @@ variable allowed_ips {
 }
 resource  "aws_security_group" "manager" {
 
-  name        = "recorder-manager-v0--tf"
+  name        = "recorder-manager-v0--tf-${terraform.workspace}"
   description = "Security group for Recorder Manager"
   vpc_id      = data.aws_vpc.default.id
 
@@ -99,8 +99,7 @@ resource "aws_instance" "this" {
   #  private_ips                 = ["172.31.32.5", "172.31.46.20"]
   key_name                    = "mykensho"
   vpc_security_group_ids      = [aws_security_group.manager.id]
-  associate_public_ip_address = true
-
+  associate_public_ip_address = true                     
   #user_data_base64 = base64encode(local.user_data)
   user_data = base64encode(data.template_file.init.rendered)
 
@@ -112,7 +111,7 @@ resource "aws_instance" "this" {
 
 
   tags = {
-    "Name"      = "recorder-manager-v0--tf"
+    "Name"      = "recorder-manager-v0--tf-${terraform.workspace}"
     //"Name"      = data.aws_ami.manager_ami.name
     "id" : "recorder-manager-v0--tf",
     "Role"      = "recorder-manager"
