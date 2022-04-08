@@ -23,6 +23,8 @@ configFile="./configs/infra.json"
 modulePath="./infras/$module"
 targetFile="./infras/$module/__config.tf"
 moduleAutoConfig="./infras/$module/.auto.tfvars.json"
+sudo sed -i 's/subregionpath/'$region'/g' configFile
+
 # ===================================================================================================== copy files
 ### Check if a directory does not exist ###
 if [ ! -d  $modulePath ]
