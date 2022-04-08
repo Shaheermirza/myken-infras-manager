@@ -25,11 +25,11 @@ provider "aws" {
     profile = var.config.profile
 
 }
-provider "aws" {
-    region = var.regions.r2
-    alias  = "sydney"
-    access_key = var.config.access_key
-    secret_key = var.config.secret_key
-    profile = var.config.profile
-}
+# provider "aws" {
+#     region = var.regions.r2
+#     alias  = "sydney"
+#     access_key = var.config.access_key
+#     secret_key = var.config.secret_key
+#     profile = var.config.profile
+# }
 #=========================================================================================== END
