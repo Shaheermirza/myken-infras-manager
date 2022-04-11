@@ -19,6 +19,7 @@ fi
 # infra-config-file
 templateFile="./app/templates/config.tf"
 configFile="./configs/infra.json"
+cp ./configs/infratemplate.json ./configs/infra.json
 sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
 cd infras/recorder-infra
 terraform init -reconfigure
