@@ -15,15 +15,19 @@ then
     echo "parameters action and module Required." 
     exit 1 # die with error code 9999
 fi
+function GenerateInitialization()
+{
+     cp ./configs/infratemplate.json ./configs/infra.json
+    sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
+    cd infras/recorder-infra
+    terraform init -reconfigure
+    cd ../../
+}
 # ===================================================================================================== params
 # infra-config-file
 templateFile="./app/templates/config.tf"
 configFile="./configs/infra.json"
-cp ./configs/infratemplate.json ./configs/infra.json
-sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
-cd infras/recorder-infra
-terraform init -reconfigure
-cd ../../
+GenerateInitialization
 modulePath="./infras/$module"
 targetFile="./infras/$module/__config.tf"
 moduleAutoConfig="./infras/$module/.auto.tfvars.json"
@@ -38,8 +42,10 @@ fi
 function getRandom (){
     echo $(date +"%FT%H%M")
 }
+
 # ===================================================================================================== functions
 function init () {
+    GenerateInitialization
     mkdir -p tmp
     tmpConfigFile="./tmp/$(date +"%FT%H%M").json";
     echo "creating tmp file $tmpConfigFile"
@@ -92,21 +98,13 @@ function refresh () {
     cd ../..
 }
 function deploy () {
-    cp ./configs/infratemplate.json ./configs/infra.json
-    sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
-    cd infras/recorder-infra
-    terraform init -reconfigure
-    cd ../../
+    GenerateInitialization
     cd ./infras/$module
     terraform apply -auto-approve 
     cd ../..
 }
 function destroy () {
-    cp ./configs/infratemplate.json ./configs/infra.json
-    sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
-    cd infras/recorder-infra
-    terraform init -reconfigure
-    cd ../../
+    GenerateInitialization
     cd ./infras/$module
     terraform destroy -auto-approve
     cd ../..
