@@ -19,7 +19,7 @@ function GenerateInitialization()
 {
      cp ./configs/infratemplate.json ./configs/infra.json
     sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
-    cd infras/recorder-infra
+    cd infras/$module
     terraform init -reconfigure
     cd ../../
 }
