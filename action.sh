@@ -19,7 +19,10 @@ fi
 # infra-config-file
 templateFile="./app/templates/config.tf"
 configFile="./configs/infra.json"
-#sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
+sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
+cd infras/recorder-infra
+terraform init -reconfigure
+cd ../../
 modulePath="./infras/$module"
 targetFile="./infras/$module/__config.tf"
 moduleAutoConfig="./infras/$module/.auto.tfvars.json"
