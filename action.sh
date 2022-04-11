@@ -51,6 +51,7 @@ function init () {
     sudo sed -i 's/t2.xlarge/'$serversize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
     sudo sed -i 's/minnodesize/'$minsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
     sudo sed -i 's/maxnodesize/'$maxsize'/g' ./infras/$module/modules/multi-region/modules/manager/data/main.json
+       fi
     case "$region" in
    "all") sudo cp ./app/infras/$module/all.tf ./infras/$module/main.tf
    ;;
@@ -61,8 +62,9 @@ function init () {
    "london") sudo cp ./app/infras/$module/london.tf ./infras/$module/main.tf 
    ;;
     esac
-    fi
+ 
     #sudo mv ./app/infras/$module/mumbai.tf ./infras/$module/main.tf
+     
     python app/scripts/generate-file-from-template.py $configFile $tmpConfigFile $tmpConfigFile
     cp $tmpConfigFile $moduleAutoConfig
     python app/scripts/generate-file-from-template.py $templateFile $tmpConfigFile $targetFile
@@ -90,11 +92,21 @@ function refresh () {
     cd ../..
 }
 function deploy () {
+    cp ./configs/infratemplate.json ./configs/infra.json
+    sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
+    cd infras/recorder-infra
+    terraform init -reconfigure
+    cd ../../
     cd ./infras/$module
     terraform apply -auto-approve 
     cd ../..
 }
 function destroy () {
+    cp ./configs/infratemplate.json ./configs/infra.json
+    sudo sed -i 's/subregionpath/'$region'/g' ./configs/infra.json
+    cd infras/recorder-infra
+    terraform init -reconfigure
+    cd ../../
     cd ./infras/$module
     terraform destroy -auto-approve
     cd ../..
