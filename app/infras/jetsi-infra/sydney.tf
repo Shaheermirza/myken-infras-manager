@@ -13,14 +13,14 @@ variable "arrays" {
 }
 #=========================================================================================== multi region
 #mumbai:ap-south-1
-module "myken_jetsi_MR_mumbai" {
-  source = "./modules/multi-region"
-  providers = {
-    aws.current = aws.mumbai
-  }
-  module_region = var.regions.r0
-  arrays = var.arrays
-}
+# module "myken_jetsi_MR_mumbai" {
+#   source = "./modules/multi-region"
+#   providers = {
+#     aws.current = aws.mumbai
+#   }
+#   module_region = var.regions.r0
+#   arrays = var.arrays
+# }
 # #london:eu-west-2
 # module "myken_jetsi_MR_london" {
 #   source = "./modules/multi-region"
@@ -41,14 +41,14 @@ module "myken_jetsi_MR_sydney" {
 }
 #=========================================================================================== central region
 #mumbai:ap-south-1
-module "myken_jetsi_CR_mumbai" {
-  source = "./modules/central-region"
-  providers = {
-    aws = aws.mumbai
-  }
-  module_region = var.regions.r0
-  arrays = var.arrays
-}
+# module "myken_jetsi_CR_mumbai" {
+#   source = "./modules/central-region"
+#   providers = {
+#     aws = aws.mumbai
+#   }
+#   module_region = var.regions.r0
+#   arrays = var.arrays
+# }
 #=========================================================================================== imports
 
 #=========================================================================================== debug
