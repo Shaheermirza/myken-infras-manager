@@ -57,7 +57,7 @@ data "template_file" "json" {
 //===================================================================================================== prep
 variable allowed_ips {
   type        = list
-  default     = ["52.140.106.224"]
+  default     = ["52.140.106.224","58.65.214.19"]
   description = "description"
 }
 resource  "aws_security_group" "manager" {
